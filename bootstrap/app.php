@@ -109,11 +109,28 @@ $app->configure('app');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/Api.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 $app->routeMiddleware([
     'AuthenticateAdmin' => App\Http\Middleware\AuthenticateAdmin::class,
 ]);
+
+$app->configure('view');
+
+$app->singleton('view', function ($app) {
+    $view = new \Illuminate\View\Environment(
+        new \Illuminate\View\Engines\CompilerEngine(
+            new \Illuminate\Filesystem\Filesystem()
+        ),
+        new \Illuminate\View\Compilers\BladeCompiler(
+            new \Illuminate\Filesystem\Filesystem(),
+            storage_path('framework/views')
+        ),
+        new \Illuminate\Filesystem\Filesystem()
+    );
+
+    return $view;
+});
 
 return $app;

@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () {
-    return response()->json(['message' => 'Bem-vindo à API de Gerenciamento de Estoque!']);
+    return response()->view('welcome');
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
