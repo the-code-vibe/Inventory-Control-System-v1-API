@@ -1,0 +1,37 @@
+name: Pipeline - API
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Instalar dependências PHP
+        run: composer install --no-dev --prefer-dist --optimize-autoloader
+        working-directory: framework
+
+      - name: Enviar arquivos para o servidor via SCP
+        uses: appleboy/scp-action@v0.1.6
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "./*"
+          target: "/home/u858577505/domains/collaborative.vitorgabrieldev.io/public_html/gerenciador-estoque/api/"
