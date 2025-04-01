@@ -24,7 +24,6 @@ jobs:
 
       - name: Instalar dependências PHP
         run: composer install --no-dev --prefer-dist --optimize-autoloader
-        working-directory: framework
 
       - name: Enviar arquivos para o servidor via SCP
         uses: appleboy/scp-action@v0.1.6
