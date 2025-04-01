@@ -112,4 +112,8 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+$app->routeMiddleware([
+    'AuthenticateAdmin' => App\Http\Middleware\AuthenticateAdmin::class,
+]);
+
 return $app;
