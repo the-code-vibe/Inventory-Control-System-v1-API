@@ -4,24 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'users';
+    protected $table = 'categories';
 
     protected $fillable = [
         'uuid',
-        'avatar',
-        'name',
-        'email',
-        'password_hash',
-        'phone',
-        'role',
-        'status',
-        'code_verification_account'
+        'title',
+        'created_at',
+        'updated_at'
     ];
 
     protected $hidden = [];
@@ -34,8 +28,8 @@ class User extends Model
 
     protected $keyType = 'int';
 
-    public function setPasswordAttribute($value)
+    public function products()
     {
-        $this->attributes['password_hash'] = Hash::make($value);
+        return $this->hasMany(Product::class, 'id_category');
     }
 }
