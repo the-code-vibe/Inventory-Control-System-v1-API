@@ -13,6 +13,10 @@
 |
 */
 
+$router->get('/', function () {
+    return response()->json(['message' => 'Bem-vindo à API de Gerenciamento de Estoque!']);
+});
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/stock/metrics', 'StockController@metrics');
 
