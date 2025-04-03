@@ -25,6 +25,9 @@ jobs:
       - name: Instalar dependências PHP
         run: composer install --no-dev --prefer-dist --optimize-autoloader
 
+      - name: Gerar documentação Swagger
+        run: php artisan l5-swagger:generate
+
       - name: Enviar arquivos para o servidor via SCP
         uses: appleboy/scp-action@v0.1.6
         with:
