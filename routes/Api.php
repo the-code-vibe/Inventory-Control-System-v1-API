@@ -21,7 +21,6 @@ $router->get('/api/documentation', function () {
     return redirect('/docs-ui/dist/index.html');
 });
 
-
 $router->post('/auth/login', 'AuthController@login');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
