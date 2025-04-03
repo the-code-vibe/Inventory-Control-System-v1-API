@@ -36,81 +36,16 @@ $app->singleton(
 |--------------------------------------------------------------------------
 */
 $app->configure('app');
-$app->configure('mail');
-$app->configure('database');
 $app->configure('view');
-$app->configure('logging');
 
-$app->instance('config', new \Illuminate\Config\Repository([
-    'mail' => [
-        'default' => env('MAIL_MAILER', 'smtp'),
-        'mailers' => [
-            'smtp' => [
-                'transport' => 'smtp',
-                'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-                'port' => env('MAIL_PORT', 587),
-                'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-                'username' => env('MAIL_USERNAME'),
-                'password' => env('MAIL_PASSWORD'),
-            ],
-        ],
-        'from' => [
-            'address' => env('MAIL_FROM_ADDRESS', 'noreply@example.com'),
-            'name' => env('MAIL_FROM_NAME', 'Example App'),
-        ],
-    ]
-]));
-
-$app->instance('config', new \Illuminate\Config\Repository(array_merge(
-    $app->make('config')->all(),
-    [
-        'database' => [
-            'default' => env('DB_CONNECTION', 'mysql'),
-            'connections' => [
-                'mysql' => [
-                    'driver'    => 'mysql',
-                    'host'      => env('DB_HOST', '127.0.0.1'),
-                    'port'      => env('DB_PORT', 3306),
-                    'database'  => env('DB_DATABASE', 'inventory_db'),
-                    'username'  => env('DB_USERNAME', 'root'),
-                    'password'  => env('DB_PASSWORD', ''),
-                    'charset'   => 'utf8mb4',
-                    'collation' => 'utf8mb4_unicode_ci',
-                    'prefix'    => '',
-                    'strict'    => true,
-                    'engine'    => null,
-                ],
-            ],
-        ]
-    ]
-)));
-
-$app->instance('config', array_merge($app->make('config')->all(), [
-    'view.paths' => [base_path('resources/views')],
-    'view.compiled' => storage_path('framework/views'),
-]));
-
-$app->instance('config', array_merge($app->make('config')->all(), [
-    'logging.default' => env('LOG_CHANNEL', 'stack'),
-    'logging.channels' => [
-        'stack' => [
-            'driver' => 'stack',
-            'channels' => ['single'],
-        ],
-        'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/lumen.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-        ],
-    ],
-]));
 
 $app->register(Laravel\Lumen\Console\ConsoleServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-$app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Laravel\Tinker\TinkerServiceProvider::class);
 $app->register(Illuminate\View\ViewServiceProvider::class);
+$app->singleton(Illuminate\Contracts\Routing\ResponseFactory::class, Illuminate\Routing\ResponseFactory::class);
+$app->register(Illuminate\Routing\RoutingServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

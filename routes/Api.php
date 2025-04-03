@@ -18,8 +18,6 @@ $router->get('/', function () {
 });
 
 $router->post('/auth/login', 'AuthController@login');
-$router->post('/auth/forgot-password', 'AuthController@forgotPassword');
-$router->post('/auth/reset-password', 'AuthController@resetPassword');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/stock/metrics', 'StockController@metrics');
