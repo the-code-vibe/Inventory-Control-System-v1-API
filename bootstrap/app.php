@@ -35,9 +35,7 @@ $app->singleton(
 | Register Config Files
 |--------------------------------------------------------------------------
 */
-$app->configure('app');
-$app->configure('view');
-
+$app->configure('l5-swagger');
 
 $app->register(Laravel\Lumen\Console\ConsoleServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
@@ -46,6 +44,15 @@ $app->register(Laravel\Tinker\TinkerServiceProvider::class);
 $app->register(Illuminate\View\ViewServiceProvider::class);
 $app->singleton(Illuminate\Contracts\Routing\ResponseFactory::class, Illuminate\Routing\ResponseFactory::class);
 $app->register(Illuminate\Routing\RoutingServiceProvider::class);
+$app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+$app->register(L5Swagger\L5SwaggerServiceProvider::class);
+
+$app->configure('app');
+$app->configure('view');
+
+$app->bind('path.public', function () {
+    return base_path('public');
+});
 
 /*
 |--------------------------------------------------------------------------
