@@ -1,6 +1,6 @@
 window.onload = function() {
   window.ui = SwaggerUIBundle({
-    url: "/docs/api-docs.json",
+    url: "https://collaborative.vitorgabrieldev.io/gerenciador-estoque/api/public/docs/api-docs.json",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
