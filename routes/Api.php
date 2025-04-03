@@ -14,8 +14,12 @@
 */
 
 $router->get('/', function () {
-    return response()->view('welcome');
+    return response('<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rota Não Autorizada</title><style>body{display:flex;justify-content:center;align-items:center;height:100vh;background:#f1f1f1;font-family:Arial, sans-serif;text-align:center;flex-direction:column;} h1{color:#d9534f;} p{color:#333;}</style></head><body><h1>Rota Não Autorizada</h1><p>Você não tem permissão para acessar esta rota.</p></body></html>', 403);
 });
+
+$router->post('/auth/login', 'AuthController@login');
+$router->post('/auth/forgot-password', 'AuthController@forgotPassword');
+$router->post('/auth/reset-password', 'AuthController@resetPassword');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/stock/metrics', 'StockController@metrics');
@@ -40,7 +44,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/purchase', 'PurchaseController@index');
         $router->get('/purchase/{uuid}', 'PurchaseController@show');
         $router->post('/purchase', 'PurchaseController@store');
-        $router->put('/purchase', 'PurchaseController@update');
+        $router->put('/purchase/{uuid}', 'PurchaseController@update');
     });
 
     $router->put('/users/{uuid}/edit', 'UserController@update');
