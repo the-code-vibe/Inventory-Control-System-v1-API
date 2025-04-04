@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => env('L5_SWAGGER_TITLE', 'Minha API'),
+                'title' => env('L5_SWAGGER_TITLE', 'Gerenciador de estoque'),
             ],
             'routes' => [
                 'api' => 'api/documentation',
