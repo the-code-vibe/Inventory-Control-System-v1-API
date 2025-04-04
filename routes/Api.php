@@ -66,3 +66,7 @@ $router->get('/', function () {
 $router->get('/docs', function () {
     return response()->file(base_path('public/docs-ui/dist/index.html'));
 });
+
+$router->options('{any:.*}', function () {
+    return response('', 200);
+});
