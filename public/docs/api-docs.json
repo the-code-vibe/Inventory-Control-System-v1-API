@@ -276,6 +276,402 @@
                 ]
             }
         },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Listar todos os produtos",
+                "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Criar novo produto",
+                "operationId": "399770d33fa4672f1216707d0e236763",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_provider",
+                                    "id_category",
+                                    "price",
+                                    "title",
+                                    "quantity",
+                                    "unit_type"
+                                ],
+                                "properties": {
+                                    "id_provider": {
+                                        "type": "integer"
+                                    },
+                                    "id_category": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "unit_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "kg",
+                                            "g",
+                                            "T",
+                                            "unit",
+                                            "L",
+                                            "ml"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto criado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/products/{uuid}": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Buscar produto por UUID",
+                "operationId": "f271bec4250230adb5945340b7aa979a",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do produto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto encontrado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Atualizar produto",
+                "operationId": "16871a2c31f7742ecb36c971118c9a01",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do produto",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_provider": {
+                                        "type": "integer"
+                                    },
+                                    "id_category": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "unit_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "kg",
+                                            "g",
+                                            "T",
+                                            "unit",
+                                            "L",
+                                            "ml"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto atualizado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Excluir produto",
+                "operationId": "db1eb6ca2f25827576a8443b5cb09b04",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do produto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Produto excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/providers": {
+            "get": {
+                "tags": [
+                    "Fornecedores"
+                ],
+                "summary": "Listar todos os fornecedores",
+                "operationId": "ae4eea74746a75b8f2bdee3d07a49309",
+                "responses": {
+                    "200": {
+                        "description": "Lista de fornecedores"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Fornecedores"
+                ],
+                "summary": "Criar novo fornecedor",
+                "operationId": "22a88d5f1b1c596a5c71d037cfb380fb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "contact"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Fornecedor XYZ"
+                                    },
+                                    "contact": {
+                                        "type": "string",
+                                        "example": "(11) 99999-9999"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "contato@xyz.com"
+                                    },
+                                    "cnpj": {
+                                        "type": "string",
+                                        "example": "12345678000199"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Fornecedor criado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/providers/{uuid}": {
+            "get": {
+                "tags": [
+                    "Fornecedores"
+                ],
+                "summary": "Buscar fornecedor por UUID",
+                "operationId": "a461ba5253d93e5ffec6389b4ba9b0b5",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do fornecedor",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fornecedor encontrado"
+                    },
+                    "404": {
+                        "description": "Fornecedor não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Fornecedores"
+                ],
+                "summary": "Atualizar fornecedor",
+                "operationId": "de5cd1fe921f945ffd502dd094065c1f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do fornecedor",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Fornecedor Atualizado"
+                                    },
+                                    "contact": {
+                                        "type": "string",
+                                        "example": "(11) 98888-8888"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "novo@xyz.com"
+                                    },
+                                    "cnpj": {
+                                        "type": "string",
+                                        "example": "98765432000111"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fornecedor atualizado"
+                    },
+                    "404": {
+                        "description": "Fornecedor não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Fornecedores"
+                ],
+                "summary": "Excluir fornecedor",
+                "operationId": "17723a816a8555187e032e15f3b470c1",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do fornecedor",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Fornecedor excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Fornecedor não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/stock/metrics": {
             "get": {
                 "tags": [
@@ -340,6 +736,14 @@
         {
             "name": "Categorias",
             "description": "Categorias"
+        },
+        {
+            "name": "Produtos",
+            "description": "Produtos"
+        },
+        {
+            "name": "Fornecedores",
+            "description": "Fornecedores"
         },
         {
             "name": "Estoque",
