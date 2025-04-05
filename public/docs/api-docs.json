@@ -672,6 +672,203 @@
                 ]
             }
         },
+        "/purchases": {
+            "get": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Listar todas as compras",
+                "operationId": "7945987d1d141635d774af5e6d9bd01d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de compras"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Criar nova compra",
+                "operationId": "3ccc6b7d6fc9764320ecff4789a0a44a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_products",
+                                    "id_providers",
+                                    "quantity",
+                                    "price",
+                                    "purcharse_date"
+                                ],
+                                "properties": {
+                                    "id_products": {
+                                        "description": "ID do produto",
+                                        "type": "integer"
+                                    },
+                                    "id_providers": {
+                                        "description": "ID do fornecedor",
+                                        "type": "integer"
+                                    },
+                                    "quantity": {
+                                        "description": "Quantidade comprada",
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "description": "Preço unitário",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "purcharse_date": {
+                                        "description": "Data da compra",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Compra criada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/purchases/{uuid}": {
+            "get": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Buscar compra por UUID",
+                "operationId": "18be72858d387301708f800e5468897d",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID da compra",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Compra encontrada"
+                    },
+                    "404": {
+                        "description": "Compra não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Atualizar compra",
+                "operationId": "4cbd7bac3cb38467af8ab011b4361622",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID da compra",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_products": {
+                                        "description": "ID do produto",
+                                        "type": "integer"
+                                    },
+                                    "id_providers": {
+                                        "description": "ID do fornecedor",
+                                        "type": "integer"
+                                    },
+                                    "quantity": {
+                                        "description": "Quantidade comprada",
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "description": "Preço unitário",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "purcharse_date": {
+                                        "description": "Data da compra",
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Compra atualizada"
+                    },
+                    "404": {
+                        "description": "Compra não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Excluir compra",
+                "operationId": "512cda61d80e50ff2c4bf52143fc8f34",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID da compra",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Compra excluída com sucesso"
+                    },
+                    "404": {
+                        "description": "Compra não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/stock/metrics": {
             "get": {
                 "tags": [
@@ -726,6 +923,177 @@
                     }
                 ]
             }
+        },
+        "/users/collaborators": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Listar todos os usuários",
+                "operationId": "6943b852f7b6c594de95fdb0e0ebdc8c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Criar novo usuário",
+                "operationId": "f67aadbcd1a6092154f83f92475d2762",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/collaborators/{uuid}": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Buscar usuário por UUID",
+                "operationId": "bba5a5ba50a69ba3c12103ae9591b881",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário encontrado"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Excluir usuário",
+                "operationId": "00fca995cb10327b6cd8d917b97d163f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{uuid}/edit": {
+            "put": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Atualizar usuário",
+                "operationId": "a338641e50d725a559f4dd22c284ec1b",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário atualizado"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "tags": [
@@ -746,8 +1114,16 @@
             "description": "Fornecedores"
         },
         {
+            "name": "Compras",
+            "description": "Compras"
+        },
+        {
             "name": "Estoque",
             "description": "Estoque"
+        },
+        {
+            "name": "Usuários",
+            "description": "Usuários"
         }
     ]
 }
