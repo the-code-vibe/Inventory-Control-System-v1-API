@@ -60,8 +60,7 @@ $app->bind('path.public', function () {
 |--------------------------------------------------------------------------
 */
 $app->routeMiddleware([
-    'auth'            => App\Http\Middleware\Authenticate::class,
-    'jwt.auth'        => Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+    'auth' => App\Http\Middleware\JwtMiddleware::class,
     'AuthenticateAdmin' => App\Http\Middleware\AuthenticateAdmin::class,
 ]);
 

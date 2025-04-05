@@ -17,9 +17,9 @@ class Purchase extends Model
         'id_providers',
         'quantity',
         'price',
-        'price',
         'purcharse_date',
-        'updated_at'
+        'updated_at',
+        'created_at'
     ];
 
     protected $hidden = [];

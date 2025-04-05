@@ -9,7 +9,6 @@ class PurchaseRequest extends Model
 {
     use HasFactory;
 
-    // Definindo explicitamente a tabela
     protected $table = 'purchase_requests';
 
     protected $fillable = [

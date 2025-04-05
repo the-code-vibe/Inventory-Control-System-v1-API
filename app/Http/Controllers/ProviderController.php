@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class ProviderController extends Controller
 {
+
+    use HasFactory;
+
     public function index()
     {
         return response()->json(User::all());

@@ -10,14 +10,14 @@ class UsersSeeder extends Seeder
 {
     public function run()
     {
-        // User::factory()->count(10)->create();
+        User::factory()->count(20)->create();
 
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'vitorgabrieldeoliveiradev@gmail.com',
-            'password_hash' => Hash::make('123456'),
-            'role' => 'admin',
-            'status' => 1,
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Admin User',
+        //     'email' => 'vitorgabrieldeoliveiradev@gmail.com',
+        //     'password_hash' => Hash::make('123456'),
+        //     'role' => 'admin',
+        //     'status' => 1,
+        // ]);
     }
 }
