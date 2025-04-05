@@ -19,8 +19,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/stock/metrics', 'StockController@metrics');
 
     $router->group(['middleware' => 'admin'], function () use ($router) {
-        $router->post('/users/collaborators', 'UserController@store');
-        $router->delete('/users/collaborators/{uuid}', 'UserController@destroy');
+        $router->post('/users', 'UserController@store');
+        $router->delete('/users/{uuid}', 'UserController@destroy');
         
         $router->delete('/products/{uuid}', 'ProductController@destroy');
         $router->post('/products', 'ProductController@store');
@@ -39,10 +39,12 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/purchase/{uuid}', 'PurchaseController@show');
         $router->post('/purchase', 'PurchaseController@store');
         $router->put('/purchase/{uuid}', 'PurchaseController@update');
+        $router->delete('/purchase/{uuid}', 'PurchaseController@destroy');
     });
 
-    $router->put('/users/{uuid}/edit', 'UserController@update');
-    $router->get('/users/collaborators', 'UserController@index');
+    $router->get('/users', 'UserController@index');
+    $router->get('/users/{uuid}', 'UserController@show');
+    $router->put('/users/{uuid}', 'UserController@update');
 
     $router->get('/products', 'ProductController@index');
     $router->get('/products/{uuid}', 'ProductController@show');
