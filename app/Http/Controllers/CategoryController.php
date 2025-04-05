@@ -2,42 +2,145 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-
-    use HasFactory;
-
+    /**
+     * @OA\Get(
+     *     path="/categories",
+     *     summary="Listar todas as categorias",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de categorias"
+     *     )
+     * )
+     */
     public function index()
     {
-        return response()->json(User::all());
+        return response()->json(Category::all());
     }
 
+    /**
+     * @OA\Get(
+     *     path="/categories/{uuid}",
+     *     summary="Buscar categoria por UUID",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         required=true,
+     *         description="UUID da categoria"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categoria encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoria não encontrada"
+     *     )
+     * )
+     */
     public function show($uuid)
     {
-        return response()->json(User::findOrFail($uuid));
+        $category = Category::where('uuid', $uuid)->firstOrFail();
+        return response()->json($category);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/categories",
+     *     summary="Criar nova categoria",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title"},
+     *             @OA\Property(property="title", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Categoria criada"
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
-        $user = User::create($request->all());
-        return response()->json($user, 201);
+        $data = $request->only(['title']);
+        $data['uuid'] = Str::uuid();
+        $category = Category::create($data);
+        return response()->json($category, 201);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/categories/{uuid}",
+     *     summary="Atualizar categoria",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         required=true,
+     *         description="UUID da categoria"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categoria atualizada"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoria não encontrada"
+     *     )
+     * )
+     */
     public function update(Request $request, $uuid)
     {
-        $user = User::findOrFail($uuid);
-        $user->update($request->all());
-        return response()->json($user);
+        $category = Category::where('uuid', $uuid)->firstOrFail();
+        $category->update($request->only(['title']));
+        return response()->json($category);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/categories/{uuid}",
+     *     summary="Excluir categoria",
+     *     tags={"Categorias"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         required=true,
+     *         description="UUID da categoria"
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Categoria excluída com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Categoria não encontrada"
+     *     )
+     * )
+     */
     public function destroy($uuid)
     {
-        $user = User::findOrFail($uuid);
-        $user->delete();
+        $category = Category::where('uuid', $uuid)->firstOrFail();
+        $category->delete();
         return response()->json(null, 204);
     }
 }

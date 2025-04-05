@@ -18,7 +18,7 @@ $router->post('/auth/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/stock/metrics', 'StockController@metrics');
 
-    $router->group(['middleware' => 'AuthenticateAdmin'], function () use ($router) {
+    $router->group(['middleware' => 'admin'], function () use ($router) {
         $router->post('/users/collaborators', 'UserController@store');
         $router->delete('/users/collaborators/{uuid}', 'UserController@destroy');
         

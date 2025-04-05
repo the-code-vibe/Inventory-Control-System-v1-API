@@ -24,7 +24,8 @@ class User extends Model implements AuthenticatableContract, JWTSubject
         'phone',
         'role',
         'status',
-        'code_verification_account'
+        'code_verification_account',
+        'is_admin'
     ];
 
     protected $hidden = [];

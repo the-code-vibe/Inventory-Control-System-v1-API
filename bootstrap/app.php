@@ -61,7 +61,7 @@ $app->bind('path.public', function () {
 */
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\JwtMiddleware::class,
-    'AuthenticateAdmin' => App\Http\Middleware\AuthenticateAdmin::class,
+    'admin' => App\Http\Middleware\AuthenticateAdmin::class,
 ]);
 
 $app->middleware([
