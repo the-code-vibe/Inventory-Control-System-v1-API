@@ -28,7 +28,10 @@ class JwtMiddleware
             $request->setUserResolver(fn () => $user);
             return $next($request);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Token inválido'], 401);
+            return response()->json([
+                'message' => 'Invalid token. Please log in again.',
+                'code' => 'TOKEN_INVALID'
+            ], 401);
         }
     }
 }
