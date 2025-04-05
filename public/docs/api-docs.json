@@ -120,12 +120,71 @@
                     }
                 }
             }
+        },
+        "/stock/metrics": {
+            "get": {
+                "tags": [
+                    "Estoque"
+                ],
+                "summary": "Retorna métricas do estoque",
+                "operationId": "64787a297fb74d3ef1274af4be49ca54",
+                "responses": {
+                    "200": {
+                        "description": "Métricas retornadas com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "purchases_total": {
+                                            "type": "integer",
+                                            "example": 150
+                                        },
+                                        "categories_total": {
+                                            "type": "integer",
+                                            "example": 12
+                                        },
+                                        "provider_total": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "employees_total": {
+                                            "type": "integer",
+                                            "example": 8
+                                        },
+                                        "monthly_purchases": {
+                                            "type": "object",
+                                            "example": {
+                                                "Nov": 1234.56,
+                                                "Oct": 980.25,
+                                                "Sep": 1100
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "tags": [
         {
             "name": "Autenticação",
             "description": "Endpoints relacionados à autenticação do usuário"
+        },
+        {
+            "name": "Estoque",
+            "description": "Estoque"
         }
     ]
 }
